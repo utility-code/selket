@@ -28,6 +28,7 @@
 </summary>
 <pre><code class="python">from selket.backbone import *
 from selket.sitegen import *
+from pathlib import Path
 
 &#34;&#34;&#34;
 Because I like minimalism xD
@@ -39,12 +40,10 @@ def main(ag):
     &#34;&#34;&#34;
     Just calls everything else
     &#34;&#34;&#34;
-    from pathlib import Path
-
-    print(markToHTML(Path.joinpath(Path.cwd(), &#34;index.md&#34;)))
-    #  initializeSite(ag)
-    #  if ag.p == True:
-    #      newPost()</code></pre>
+    print(listmd(Path.cwd()))
+    initializeSite(ag)
+    if ag.p == True:
+        newPost()</code></pre>
 </details>
 </section>
 <section>
@@ -67,12 +66,10 @@ def main(ag):
     &#34;&#34;&#34;
     Just calls everything else
     &#34;&#34;&#34;
-    from pathlib import Path
-
-    print(markToHTML(Path.joinpath(Path.cwd(), &#34;index.md&#34;)))
-    #  initializeSite(ag)
-    #  if ag.p == True:
-    #      newPost()</code></pre>
+    print(listmd(Path.cwd()))
+    initializeSite(ag)
+    if ag.p == True:
+        newPost()</code></pre>
 </details>
 </dd>
 </dl>

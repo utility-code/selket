@@ -52,8 +52,10 @@ def joinAndMake(p1, p2):
     Returns the directory after joining a parent and a directory name, then makes it if it does not exist
     &#34;&#34;&#34;
     toMake = Path.joinpath(p1, p2)
-    if Path.is_dir(toMake) == False:
+    if Path.is_dir(toMake) == False and toMake.name != Path.cwd().name:
         Path.mkdir(toMake)
+    else:
+        return 0
 
 
 def createConfig(ag, fp):
@@ -78,13 +80,14 @@ def inits(ag, fpath, newfp):
     &#34;&#34;&#34;
     Create the required directories
     &#34;&#34;&#34;
-    joinAndMake(fpath, ag.n)
-    if len(os.listdir(newfp)) == 0 and ag.p == False:
-        for i in list_to_init:
-            joinAndMake(newfp, i)
+    flag = joinAndMake(fpath, ag.n)
+    if flag != 0:
+        if len(os.listdir(newfp)) == 0 and ag.p == False:
+            for i in list_to_init:
+                joinAndMake(newfp, i)
 
-        Path.touch(Path.joinpath(newfp, &#34;index.md&#34;))
-        print(f&#34;Your site is at : {str(newfp)}&#34;)
+            Path.touch(Path.joinpath(newfp, &#34;index.md&#34;))
+    print(f&#34;Your site is at : {str(newfp)}&#34;)
 
 
 def initializeSite(ag):
@@ -99,7 +102,10 @@ def initializeSite(ag):
             shutil.rmtree(newfp)
 
     inits(ag, fpath, newfp)
-    createConfig(ag, newfp)
+    try:
+        createConfig(ag, newfp)
+    except FileNotFoundError:
+        pass
 
 
 def postName(name):
@@ -126,7 +132,7 @@ def createPost(fpath, fname, ptags):
     if Path.is_file(fname) == True:
         print(&#34;This already exists. Try again?&#34;)
     else:
-        print(fname)
+        print(f&#34;Your post is at : &#34;, fname.with_suffix(&#34;.md&#34;))
         with open(fname.with_suffix(&#34;.md&#34;), &#34;w+&#34;) as f:
             f.write(
                 f&#34;---\nlayout : default\ndate: {datetime.now().strftime(&#39;%Y-%m-%d&#39;)}\ntags: {formatTags(ptags)}\n---\n&#34;
@@ -139,7 +145,6 @@ def newPost():
     Calls create function
     &#34;&#34;&#34;
     fpath = Path.joinpath(Path.cwd(), &#34;_posts&#34;)
-    print(fpath)
     pname = input(&#34;Post name : &#34;)
     ptags = input(&#34;Comma separated tags : &#34;)
     createPost(fpath, pname, ptags)</code></pre>
@@ -196,7 +201,7 @@ def newPost():
     if Path.is_file(fname) == True:
         print(&#34;This already exists. Try again?&#34;)
     else:
-        print(fname)
+        print(f&#34;Your post is at : &#34;, fname.with_suffix(&#34;.md&#34;))
         with open(fname.with_suffix(&#34;.md&#34;), &#34;w+&#34;) as f:
             f.write(
                 f&#34;---\nlayout : default\ndate: {datetime.now().strftime(&#39;%Y-%m-%d&#39;)}\ntags: {formatTags(ptags)}\n---\n&#34;
@@ -242,7 +247,10 @@ Also option to delete and recreate everything from scratch (debug lol)</p></div>
             shutil.rmtree(newfp)
 
     inits(ag, fpath, newfp)
-    createConfig(ag, newfp)</code></pre>
+    try:
+        createConfig(ag, newfp)
+    except FileNotFoundError:
+        pass</code></pre>
 </details>
 </dd>
 <dt id="selket.backbone.inits"><code class="name flex">
@@ -258,13 +266,14 @@ Also option to delete and recreate everything from scratch (debug lol)</p></div>
     &#34;&#34;&#34;
     Create the required directories
     &#34;&#34;&#34;
-    joinAndMake(fpath, ag.n)
-    if len(os.listdir(newfp)) == 0 and ag.p == False:
-        for i in list_to_init:
-            joinAndMake(newfp, i)
+    flag = joinAndMake(fpath, ag.n)
+    if flag != 0:
+        if len(os.listdir(newfp)) == 0 and ag.p == False:
+            for i in list_to_init:
+                joinAndMake(newfp, i)
 
-        Path.touch(Path.joinpath(newfp, &#34;index.md&#34;))
-        print(f&#34;Your site is at : {str(newfp)}&#34;)</code></pre>
+            Path.touch(Path.joinpath(newfp, &#34;index.md&#34;))
+    print(f&#34;Your site is at : {str(newfp)}&#34;)</code></pre>
 </details>
 </dd>
 <dt id="selket.backbone.joinAndMake"><code class="name flex">
@@ -281,8 +290,10 @@ Also option to delete and recreate everything from scratch (debug lol)</p></div>
     Returns the directory after joining a parent and a directory name, then makes it if it does not exist
     &#34;&#34;&#34;
     toMake = Path.joinpath(p1, p2)
-    if Path.is_dir(toMake) == False:
-        Path.mkdir(toMake)</code></pre>
+    if Path.is_dir(toMake) == False and toMake.name != Path.cwd().name:
+        Path.mkdir(toMake)
+    else:
+        return 0</code></pre>
 </details>
 </dd>
 <dt id="selket.backbone.newPost"><code class="name flex">
@@ -301,7 +312,6 @@ Calls create function</p></div>
     Calls create function
     &#34;&#34;&#34;
     fpath = Path.joinpath(Path.cwd(), &#34;_posts&#34;)
-    print(fpath)
     pname = input(&#34;Post name : &#34;)
     ptags = input(&#34;Comma separated tags : &#34;)
     createPost(fpath, pname, ptags)</code></pre>

@@ -24,8 +24,10 @@ def joinAndMake(p1, p2):
     Returns the directory after joining a parent and a directory name, then makes it if it does not exist
     """
     toMake = Path.joinpath(p1, p2)
-    if Path.is_dir(toMake) == False:
+    if Path.is_dir(toMake) == False and toMake.name != Path.cwd().name:
         Path.mkdir(toMake)
+    else:
+        return 0
 
 
 def createConfig(ag, fp):
@@ -50,13 +52,14 @@ def inits(ag, fpath, newfp):
     """
     Create the required directories
     """
-    joinAndMake(fpath, ag.n)
-    if len(os.listdir(newfp)) == 0 and ag.p == False:
-        for i in list_to_init:
-            joinAndMake(newfp, i)
+    flag = joinAndMake(fpath, ag.n)
+    if flag != 0:
+        if len(os.listdir(newfp)) == 0 and ag.p == False:
+            for i in list_to_init:
+                joinAndMake(newfp, i)
 
-        Path.touch(Path.joinpath(newfp, "index.md"))
-        print(f"Your site is at : {str(newfp)}")
+            Path.touch(Path.joinpath(newfp, "index.md"))
+    print(f"Your site is at : {str(newfp)}")
 
 
 def initializeSite(ag):
@@ -71,7 +74,10 @@ def initializeSite(ag):
             shutil.rmtree(newfp)
 
     inits(ag, fpath, newfp)
-    createConfig(ag, newfp)
+    try:
+        createConfig(ag, newfp)
+    except FileNotFoundError:
+        pass
 
 
 def postName(name):
@@ -98,7 +104,7 @@ def createPost(fpath, fname, ptags):
     if Path.is_file(fname) == True:
         print("This already exists. Try again?")
     else:
-        print(fname)
+        print(f"Your post is at : ", fname.with_suffix(".md"))
         with open(fname.with_suffix(".md"), "w+") as f:
             f.write(
                 f"---\nlayout : default\ndate: {datetime.now().strftime('%Y-%m-%d')}\ntags: {formatTags(ptags)}\n---\n"
@@ -111,7 +117,6 @@ def newPost():
     Calls create function
     """
     fpath = Path.joinpath(Path.cwd(), "_posts")
-    print(fpath)
     pname = input("Post name : ")
     ptags = input("Comma separated tags : ")
     createPost(fpath, pname, ptags)

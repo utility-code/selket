@@ -1,5 +1,6 @@
 from selket.backbone import *
 from selket.sitegen import *
+from pathlib import Path
 
 """
 Because I like minimalism xD
@@ -11,9 +12,7 @@ def main(ag):
     """
     Just calls everything else
     """
-    from pathlib import Path
-
-    print(markToHTML(Path.joinpath(Path.cwd(), "index.md")))
-    #  initializeSite(ag)
-    #  if ag.p == True:
-    #      newPost()
+    print(listmd(Path.cwd()))
+    initializeSite(ag)
+    if ag.p == True:
+        newPost()
