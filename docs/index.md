@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.2" />
-<title>pygroff API documentation</title>
+<title>selket API documentation</title>
 <meta name="description" content="" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,11 +19,26 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Namespace <code>pygroff</code></h1>
+<h1 class="title">Package <code>selket</code></h1>
 </header>
 <section id="section-intro">
 </section>
 <section>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+<dl>
+<dt><code class="name"><a title="selket.backbone" href="backbone.html">selket.backbone</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="selket.executor" href="executor.html">selket.executor</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="selket.sitegen" href="sitegen.html">selket.sitegen</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
 </section>
 <section>
 </section>
@@ -38,6 +53,13 @@
 <ul></ul>
 </div>
 <ul id="index">
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="selket.backbone" href="backbone.html">selket.backbone</a></code></li>
+<li><code><a title="selket.executor" href="executor.html">selket.executor</a></code></li>
+<li><code><a title="selket.sitegen" href="sitegen.html">selket.sitegen</a></code></li>
+</ul>
+</li>
 </ul>
 </nav>
 </main>

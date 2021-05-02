@@ -1,5 +1,5 @@
 black "."
-pdoc --force --html -o docs pygroff
+pdoc --force --html -o docs selket
 mv docs/selket/index.html docs/index.md
 mv docs/selket/* docs/
 if [[ ! -z $1 ]]; then

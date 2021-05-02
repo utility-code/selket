@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>selket.backbone API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>selket.backbone</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from pathlib import Path
+import os
+import shutil
+import json
+from datetime import datetime
+
+list_to_init = [
+    &#34;_layouts&#34;,
+    &#34;assets&#34;,
+    &#34;assets/js&#34;,
+    &#34;assets/css&#34;,
+    &#34;_posts&#34;,
+    &#34;_compiled&#34;,
+    &#34;.nojekyll&#34;,
+]
+
+
+def joinAndMake(p1, p2):
+    &#34;&#34;&#34;
+    Returns the directory after joining a parent and a directory name, then makes it if it does not exist
+    &#34;&#34;&#34;
+    toMake = Path.joinpath(p1, p2)
+    if Path.is_dir(toMake) == False:
+        Path.mkdir(toMake)
+
+
+def createConfig(ag, fp):
+    &#34;&#34;&#34;
+    Create the config file, json object. Pretty formatted because why not.
+    &#34;&#34;&#34;
+    d_config = {
+        &#34;name&#34;: ag.n,
+        &#34;math&#34;: True,
+        &#34;toc&#34;: True,
+        &#34;author&#34;: &#34;&#34;,
+        &#34;title&#34;: &#34;&#34;,
+        &#34;description&#34;: &#34;&#34;,
+    }
+    cpath = Path.joinpath(fp, &#34;config.json&#34;)
+    if Path.is_file(cpath) == False:
+        with open(cpath, &#34;w+&#34;) as f:
+            json.dump(d_config, f, indent=4)
+
+
+def inits(ag, fpath, newfp):
+    &#34;&#34;&#34;
+    Create the required directories
+    &#34;&#34;&#34;
+    joinAndMake(fpath, ag.n)
+    if len(os.listdir(newfp)) == 0 and ag.p == False:
+        for i in list_to_init:
+            joinAndMake(newfp, i)
+
+        Path.touch(Path.joinpath(newfp, &#34;index.md&#34;))
+        print(f&#34;Your site is at : {str(newfp)}&#34;)
+
+
+def initializeSite(ag):
+    &#34;&#34;&#34;
+    Create the directories, create config file.
+    Also option to delete and recreate everything from scratch (debug lol)
+    &#34;&#34;&#34;
+    fpath = Path.cwd()
+    newfp = Path.joinpath(fpath, ag.n)
+    if ag.f == True:  # clean up
+        if input(&#34;Are you sure you want to delete everything? y/n/Y/N &#34;) in list(&#34;yY&#34;):
+            shutil.rmtree(newfp)
+
+    inits(ag, fpath, newfp)
+    createConfig(ag, newfp)
+
+
+def postName(name):
+    &#34;&#34;&#34;
+    Post name format
+    &#34;&#34;&#34;
+    dt = datetime.now().strftime(&#34;%Y-%m-%d&#34;)
+    return f&#34;{dt}-{name.replace(&#39; &#39;, &#39;-&#39;)}&#34;
+
+
+def formatTags(ptags):
+    &#34;&#34;&#34;
+    Lowercase tags, strip extra spaces
+    &#34;&#34;&#34;
+    t = [x.lower().strip() for x in ptags.split(&#34;,&#34;)]
+    return &#34;,&#34;.join(t)
+
+
+def createPost(fpath, fname, ptags):
+    &#34;&#34;&#34;
+    Adds default tags and creates
+    &#34;&#34;&#34;
+    fname = Path.joinpath(fpath, fname)
+    if Path.is_file(fname) == True:
+        print(&#34;This already exists. Try again?&#34;)
+    else:
+        print(fname)
+        with open(fname.with_suffix(&#34;.md&#34;), &#34;w+&#34;) as f:
+            f.write(
+                f&#34;---\nlayout : default\ndate: {datetime.now().strftime(&#39;%Y-%m-%d&#39;)}\ntags: {formatTags(ptags)}\n---\n&#34;
+            )
+
+
+def newPost():
+    &#34;&#34;&#34;
+    User input with name and tags
+    Calls create function
+    &#34;&#34;&#34;
+    fpath = Path.joinpath(Path.cwd(), &#34;_posts&#34;)
+    print(fpath)
+    pname = input(&#34;Post name : &#34;)
+    ptags = input(&#34;Comma separated tags : &#34;)
+    createPost(fpath, pname, ptags)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="selket.backbone.createConfig"><code class="name flex">
+<span>def <span class="ident">createConfig</span></span>(<span>ag, fp)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create the config file, json object. Pretty formatted because why not.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def createConfig(ag, fp):
+    &#34;&#34;&#34;
+    Create the config file, json object. Pretty formatted because why not.
+    &#34;&#34;&#34;
+    d_config = {
+        &#34;name&#34;: ag.n,
+        &#34;math&#34;: True,
+        &#34;toc&#34;: True,
+        &#34;author&#34;: &#34;&#34;,
+        &#34;title&#34;: &#34;&#34;,
+        &#34;description&#34;: &#34;&#34;,
+    }
+    cpath = Path.joinpath(fp, &#34;config.json&#34;)
+    if Path.is_file(cpath) == False:
+        with open(cpath, &#34;w+&#34;) as f:
+            json.dump(d_config, f, indent=4)</code></pre>
+</details>
+</dd>
+<dt id="selket.backbone.createPost"><code class="name flex">
+<span>def <span class="ident">createPost</span></span>(<span>fpath, fname, ptags)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Adds default tags and creates</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def createPost(fpath, fname, ptags):
+    &#34;&#34;&#34;
+    Adds default tags and creates
+    &#34;&#34;&#34;
+    fname = Path.joinpath(fpath, fname)
+    if Path.is_file(fname) == True:
+        print(&#34;This already exists. Try again?&#34;)
+    else:
+        print(fname)
+        with open(fname.with_suffix(&#34;.md&#34;), &#34;w+&#34;) as f:
+            f.write(
+                f&#34;---\nlayout : default\ndate: {datetime.now().strftime(&#39;%Y-%m-%d&#39;)}\ntags: {formatTags(ptags)}\n---\n&#34;
+            )</code></pre>
+</details>
+</dd>
+<dt id="selket.backbone.formatTags"><code class="name flex">
+<span>def <span class="ident">formatTags</span></span>(<span>ptags)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Lowercase tags, strip extra spaces</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def formatTags(ptags):
+    &#34;&#34;&#34;
+    Lowercase tags, strip extra spaces
+    &#34;&#34;&#34;
+    t = [x.lower().strip() for x in ptags.split(&#34;,&#34;)]
+    return &#34;,&#34;.join(t)</code></pre>
+</details>
+</dd>
+<dt id="selket.backbone.initializeSite"><code class="name flex">
+<span>def <span class="ident">initializeSite</span></span>(<span>ag)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create the directories, create config file.
+Also option to delete and recreate everything from scratch (debug lol)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def initializeSite(ag):
+    &#34;&#34;&#34;
+    Create the directories, create config file.
+    Also option to delete and recreate everything from scratch (debug lol)
+    &#34;&#34;&#34;
+    fpath = Path.cwd()
+    newfp = Path.joinpath(fpath, ag.n)
+    if ag.f == True:  # clean up
+        if input(&#34;Are you sure you want to delete everything? y/n/Y/N &#34;) in list(&#34;yY&#34;):
+            shutil.rmtree(newfp)
+
+    inits(ag, fpath, newfp)
+    createConfig(ag, newfp)</code></pre>
+</details>
+</dd>
+<dt id="selket.backbone.inits"><code class="name flex">
+<span>def <span class="ident">inits</span></span>(<span>ag, fpath, newfp)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create the required directories</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def inits(ag, fpath, newfp):
+    &#34;&#34;&#34;
+    Create the required directories
+    &#34;&#34;&#34;
+    joinAndMake(fpath, ag.n)
+    if len(os.listdir(newfp)) == 0 and ag.p == False:
+        for i in list_to_init:
+            joinAndMake(newfp, i)
+
+        Path.touch(Path.joinpath(newfp, &#34;index.md&#34;))
+        print(f&#34;Your site is at : {str(newfp)}&#34;)</code></pre>
+</details>
+</dd>
+<dt id="selket.backbone.joinAndMake"><code class="name flex">
+<span>def <span class="ident">joinAndMake</span></span>(<span>p1, p2)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the directory after joining a parent and a directory name, then makes it if it does not exist</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def joinAndMake(p1, p2):
+    &#34;&#34;&#34;
+    Returns the directory after joining a parent and a directory name, then makes it if it does not exist
+    &#34;&#34;&#34;
+    toMake = Path.joinpath(p1, p2)
+    if Path.is_dir(toMake) == False:
+        Path.mkdir(toMake)</code></pre>
+</details>
+</dd>
+<dt id="selket.backbone.newPost"><code class="name flex">
+<span>def <span class="ident">newPost</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>User input with name and tags
+Calls create function</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def newPost():
+    &#34;&#34;&#34;
+    User input with name and tags
+    Calls create function
+    &#34;&#34;&#34;
+    fpath = Path.joinpath(Path.cwd(), &#34;_posts&#34;)
+    print(fpath)
+    pname = input(&#34;Post name : &#34;)
+    ptags = input(&#34;Comma separated tags : &#34;)
+    createPost(fpath, pname, ptags)</code></pre>
+</details>
+</dd>
+<dt id="selket.backbone.postName"><code class="name flex">
+<span>def <span class="ident">postName</span></span>(<span>name)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Post name format</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def postName(name):
+    &#34;&#34;&#34;
+    Post name format
+    &#34;&#34;&#34;
+    dt = datetime.now().strftime(&#34;%Y-%m-%d&#34;)
+    return f&#34;{dt}-{name.replace(&#39; &#39;, &#39;-&#39;)}&#34;</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="selket" href="index.html">selket</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="two-column">
+<li><code><a title="selket.backbone.createConfig" href="#selket.backbone.createConfig">createConfig</a></code></li>
+<li><code><a title="selket.backbone.createPost" href="#selket.backbone.createPost">createPost</a></code></li>
+<li><code><a title="selket.backbone.formatTags" href="#selket.backbone.formatTags">formatTags</a></code></li>
+<li><code><a title="selket.backbone.initializeSite" href="#selket.backbone.initializeSite">initializeSite</a></code></li>
+<li><code><a title="selket.backbone.inits" href="#selket.backbone.inits">inits</a></code></li>
+<li><code><a title="selket.backbone.joinAndMake" href="#selket.backbone.joinAndMake">joinAndMake</a></code></li>
+<li><code><a title="selket.backbone.newPost" href="#selket.backbone.newPost">newPost</a></code></li>
+<li><code><a title="selket.backbone.postName" href="#selket.backbone.postName">postName</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>
