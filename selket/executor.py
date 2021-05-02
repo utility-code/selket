@@ -1,11 +1,15 @@
 from selket.backbone import *
 from selket.sitegen import *
 
+"""
+Because I like minimalism xD
+Just calls everything and is in a different file to keep things separated and to make my life easier
+"""
+
 
 def main(ag):
     """
-    Because I like minimalism xD
-    Just calls everything and is in a different file to keep things separated and to make my life easier
+    Just calls everything else
     """
     from pathlib import Path
 

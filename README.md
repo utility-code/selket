@@ -1,6 +1,7 @@
 # Selket
 
 - A minimalistic static site generator using Python
+- [Documentation](https://subhadityamukherjee.github.io/selket/)
 - If you like GUIs please, find something else. This is not for you
 
 ## Features

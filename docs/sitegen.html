@@ -31,6 +31,10 @@ import json
 from pathlib import Path
 from selket.backbone import joinAndMake
 
+&#34;&#34;&#34;
+This module takes care of Markdown -&gt; HTML and generating the site
+&#34;&#34;&#34;
+
 
 def addCSS(md, cssname):
     return f&#34;&lt;!DOCTYPE html&gt;\n&lt;html lang=&#39;en&#39;&gt;\n&lt;head&gt;\n&lt;meta charset=&#39;utf-8&#39;&gt;\n&lt;link rel=&#39;stylesheet&#39; href= &#39;./assets/css/{cssname}.html&#39;&gt;\n&lt;/head&gt;\n&lt;body&gt;\n{md}\n&lt;/body&gt;&#34;

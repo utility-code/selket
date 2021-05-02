@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.2" />
 <title>selket API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="Jekyll is awesome, but it is too huge and bloated. Here is a minimalistic alternative which just does what is needed.
+Not many dependancies, pure …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,6 +23,17 @@
 <h1 class="title">Package <code>selket</code></h1>
 </header>
 <section id="section-intro">
+<p>Jekyll is awesome, but it is too huge and bloated. Here is a minimalistic alternative which just does what is needed.
+Not many dependancies, pure python etc etc</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Jekyll is awesome, but it is too huge and bloated. Here is a minimalistic alternative which just does what is needed.
+Not many dependancies, pure python etc etc
+&#34;&#34;&#34;</code></pre>
+</details>
 </section>
 <section>
 <h2 class="section-title" id="header-submodules">Sub-modules</h2>

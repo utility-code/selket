@@ -4,6 +4,10 @@ import shutil
 import json
 from datetime import datetime
 
+"""
+Module to set up the folder, create the needed files etc. Also ability to create new post
+"""
+
 list_to_init = [
     "_layouts",
     "assets",
