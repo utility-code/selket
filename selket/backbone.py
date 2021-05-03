@@ -113,7 +113,7 @@ def createPost(fpath, fname, ptags):
         print(f"Your post is at : ", fname.with_suffix(".md"))
         with open(fname.with_suffix(".md"), "w+") as f:
             f.write(
-                f"---\nlayout: default\ntitle: {fname.name}\ncategories: post\ndate: {datetime.now().strftime('%Y-%m-%d')}\ntags: {formatTags(ptags)}\n---\n"
+                f"---\nlayout: default\ntitle: {fname.name}\ncategories: post\ndate: {datetime.now().strftime('%Y-%m-%d')}\ntags: {formatTags(ptags)}\n---\n[title]\n\n"
             )
 
 

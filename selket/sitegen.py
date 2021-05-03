@@ -59,11 +59,14 @@ def state_vars():
 
 
 def returnIndex(statev):
+    """
+    Creates an index
+    """
     strsend = "<ul>\n"
     with open(statev["index_path"], "r") as f:
         all_files = json.load(f)
 
-    for i in all_files.keys():
+    for i in list(reversed(sorted(all_files.keys()))):
         temp = all_files[i]
         strsend += f"""<li>
         <a href = ./_compiled/{i.split('.')[0]+'.html'}>{temp[3]}</li>"""

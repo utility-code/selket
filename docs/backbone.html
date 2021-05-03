@@ -141,7 +141,7 @@ def createPost(fpath, fname, ptags):
         print(f&#34;Your post is at : &#34;, fname.with_suffix(&#34;.md&#34;))
         with open(fname.with_suffix(&#34;.md&#34;), &#34;w+&#34;) as f:
             f.write(
-                f&#34;---\nlayout: default\ntitle: {fname.name}\ncategories: post\ndate: {datetime.now().strftime(&#39;%Y-%m-%d&#39;)}\ntags: {formatTags(ptags)}\n---\n&#34;
+                f&#34;---\nlayout: default\ntitle: {fname.name}\ncategories: post\ndate: {datetime.now().strftime(&#39;%Y-%m-%d&#39;)}\ntags: {formatTags(ptags)}\n---\n[title]\n\n&#34;
             )
 
 
@@ -213,7 +213,7 @@ def newPost():
         print(f&#34;Your post is at : &#34;, fname.with_suffix(&#34;.md&#34;))
         with open(fname.with_suffix(&#34;.md&#34;), &#34;w+&#34;) as f:
             f.write(
-                f&#34;---\nlayout: default\ntitle: {fname.name}\ncategories: post\ndate: {datetime.now().strftime(&#39;%Y-%m-%d&#39;)}\ntags: {formatTags(ptags)}\n---\n&#34;
+                f&#34;---\nlayout: default\ntitle: {fname.name}\ncategories: post\ndate: {datetime.now().strftime(&#39;%Y-%m-%d&#39;)}\ntags: {formatTags(ptags)}\n---\n[title]\n\n&#34;
             )</code></pre>
 </details>
 </dd>

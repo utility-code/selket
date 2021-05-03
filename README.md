@@ -2,6 +2,7 @@
 
 - A minimalistic static site generator using Python
 - [Documentation](https://subhadityamukherjee.github.io/selket/)
+- [Syntax and tips](https://github.com/SubhadityaMukherjee/selket/blob/master/syntax.pdf)
 - If you like GUIs please, find something else. This is not for you
 
 ## Features

@@ -87,11 +87,14 @@ def state_vars():
 
 
 def returnIndex(statev):
+    &#34;&#34;&#34;
+    Creates an index
+    &#34;&#34;&#34;
     strsend = &#34;&lt;ul&gt;\n&#34;
     with open(statev[&#34;index_path&#34;], &#34;r&#34;) as f:
         all_files = json.load(f)
 
-    for i in all_files.keys():
+    for i in list(reversed(sorted(all_files.keys()))):
         temp = all_files[i]
         strsend += f&#34;&#34;&#34;&lt;li&gt;
         &lt;a href = ./_compiled/{i.split(&#39;.&#39;)[0]+&#39;.html&#39;}&gt;{temp[3]}&lt;/li&gt;&#34;&#34;&#34;
@@ -370,17 +373,20 @@ Also indexes the files for access to information</p></div>
 <span>def <span class="ident">returnIndex</span></span>(<span>statev)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Creates an index</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def returnIndex(statev):
+    &#34;&#34;&#34;
+    Creates an index
+    &#34;&#34;&#34;
     strsend = &#34;&lt;ul&gt;\n&#34;
     with open(statev[&#34;index_path&#34;], &#34;r&#34;) as f:
         all_files = json.load(f)
 
-    for i in all_files.keys():
+    for i in list(reversed(sorted(all_files.keys()))):
         temp = all_files[i]
         strsend += f&#34;&#34;&#34;&lt;li&gt;
         &lt;a href = ./_compiled/{i.split(&#39;.&#39;)[0]+&#39;.html&#39;}&gt;{temp[3]}&lt;/li&gt;&#34;&#34;&#34;
