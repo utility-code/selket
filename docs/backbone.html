@@ -41,9 +41,9 @@ list_to_init = [
     &#34;assets&#34;,
     &#34;assets/js&#34;,
     &#34;assets/css&#34;,
+    &#34;assets/img&#34;,
     &#34;_posts&#34;,
     &#34;_compiled&#34;,
-    &#34;.nojekyll&#34;,
 ]
 
 
@@ -60,8 +60,7 @@ def joinAndMake(p1, p2):
 
 def createConfig(ag, fp):
     &#34;&#34;&#34;
-    Create the config file, json object. Pretty formatted because why not.
-    &#34;&#34;&#34;
+    Create the config file, json object. Pretty formatted because why not.&#34;&#34;&#34;
     d_config = {
         &#34;name&#34;: ag.n,
         &#34;math&#34;: True,
@@ -69,6 +68,10 @@ def createConfig(ag, fp):
         &#34;author&#34;: &#34;&#34;,
         &#34;title&#34;: &#34;&#34;,
         &#34;description&#34;: &#34;&#34;,
+        &#34;fenced_code&#34;: True,
+        &#34;sane_lists&#34;: True,
+        &#34;wikilinks&#34;: True,
+        &#34;codehilite&#34;: True,
     }
     cpath = Path.joinpath(fp, &#34;config.json&#34;)
     if Path.is_file(cpath) == False:
@@ -87,6 +90,9 @@ def inits(ag, fpath, newfp):
                 joinAndMake(newfp, i)
 
             Path.touch(Path.joinpath(newfp, &#34;index.md&#34;))
+            Path.touch(Path.joinpath(newfp / &#34;_layouts&#34;, &#34;default.html&#34;))
+            Path.touch(Path.joinpath(newfp / &#34;_assets&#34;, &#34;style.css&#34;))
+            Path.touch(Path.joinpath(newfp, &#34;.nojekyll&#34;))
     print(f&#34;Your site is at : {str(newfp)}&#34;)
 
 
@@ -135,7 +141,7 @@ def createPost(fpath, fname, ptags):
         print(f&#34;Your post is at : &#34;, fname.with_suffix(&#34;.md&#34;))
         with open(fname.with_suffix(&#34;.md&#34;), &#34;w+&#34;) as f:
             f.write(
-                f&#34;---\nlayout : default\ndate: {datetime.now().strftime(&#39;%Y-%m-%d&#39;)}\ntags: {formatTags(ptags)}\n---\n&#34;
+                f&#34;---\nlayout: default\ntitle: {fname.name}\ncategories: post\ndate: {datetime.now().strftime(&#39;%Y-%m-%d&#39;)}\ntags: {formatTags(ptags)}\n---\n&#34;
             )
 
 
@@ -168,8 +174,7 @@ def newPost():
 </summary>
 <pre><code class="python">def createConfig(ag, fp):
     &#34;&#34;&#34;
-    Create the config file, json object. Pretty formatted because why not.
-    &#34;&#34;&#34;
+    Create the config file, json object. Pretty formatted because why not.&#34;&#34;&#34;
     d_config = {
         &#34;name&#34;: ag.n,
         &#34;math&#34;: True,
@@ -177,6 +182,10 @@ def newPost():
         &#34;author&#34;: &#34;&#34;,
         &#34;title&#34;: &#34;&#34;,
         &#34;description&#34;: &#34;&#34;,
+        &#34;fenced_code&#34;: True,
+        &#34;sane_lists&#34;: True,
+        &#34;wikilinks&#34;: True,
+        &#34;codehilite&#34;: True,
     }
     cpath = Path.joinpath(fp, &#34;config.json&#34;)
     if Path.is_file(cpath) == False:
@@ -204,7 +213,7 @@ def newPost():
         print(f&#34;Your post is at : &#34;, fname.with_suffix(&#34;.md&#34;))
         with open(fname.with_suffix(&#34;.md&#34;), &#34;w+&#34;) as f:
             f.write(
-                f&#34;---\nlayout : default\ndate: {datetime.now().strftime(&#39;%Y-%m-%d&#39;)}\ntags: {formatTags(ptags)}\n---\n&#34;
+                f&#34;---\nlayout: default\ntitle: {fname.name}\ncategories: post\ndate: {datetime.now().strftime(&#39;%Y-%m-%d&#39;)}\ntags: {formatTags(ptags)}\n---\n&#34;
             )</code></pre>
 </details>
 </dd>
@@ -273,6 +282,9 @@ Also option to delete and recreate everything from scratch (debug lol)</p></div>
                 joinAndMake(newfp, i)
 
             Path.touch(Path.joinpath(newfp, &#34;index.md&#34;))
+            Path.touch(Path.joinpath(newfp / &#34;_layouts&#34;, &#34;default.html&#34;))
+            Path.touch(Path.joinpath(newfp / &#34;_assets&#34;, &#34;style.css&#34;))
+            Path.touch(Path.joinpath(newfp, &#34;.nojekyll&#34;))
     print(f&#34;Your site is at : {str(newfp)}&#34;)</code></pre>
 </details>
 </dd>

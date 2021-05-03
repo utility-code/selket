@@ -1,5 +1,6 @@
 from selket.backbone import *
 from selket.sitegen import *
+from selket.executor import *
 from pathlib import Path
 
 """
@@ -12,7 +13,9 @@ def main(ag):
     """
     Just calls everything else
     """
-    print(listmd(Path.cwd()))
     initializeSite(ag)
+    create_index(Path.cwd())
+    svars = state_vars()
+    compilemd(Path.cwd(), svars)
     if ag.p == True:
         newPost()

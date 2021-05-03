@@ -1,11 +1,11 @@
 ## To Do
 
 - work with markdown
-- markdown -> html
 - browser serve
 - math jax
 - auto table of contents
-- live reload
+- read config
+- replace liquid syntax here
 
 ## Done
 
@@ -13,3 +13,5 @@
 - config file
 - initialize directories script
 - clean up
+- live reload
+- markdown -> html

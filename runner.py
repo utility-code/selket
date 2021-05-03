@@ -1,5 +1,7 @@
 from selket import executor
+from selket.sitegen import serve, state_vars
 import argparse as ap
+from pathlib import Path
 
 arg = ap.ArgumentParser()
 arg.add_argument(
@@ -17,4 +19,7 @@ arg.add_argument(
 
 ag = arg.parse_args()
 
-executor.main(ag)
+if ag.s == False:
+    executor.main(ag)
+else:
+    serve()

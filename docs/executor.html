@@ -28,6 +28,7 @@
 </summary>
 <pre><code class="python">from selket.backbone import *
 from selket.sitegen import *
+from selket.executor import *
 from pathlib import Path
 
 &#34;&#34;&#34;
@@ -40,8 +41,10 @@ def main(ag):
     &#34;&#34;&#34;
     Just calls everything else
     &#34;&#34;&#34;
-    print(listmd(Path.cwd()))
     initializeSite(ag)
+    create_index(Path.cwd())
+    svars = state_vars()
+    compilemd(Path.cwd(), svars)
     if ag.p == True:
         newPost()</code></pre>
 </details>
@@ -66,8 +69,10 @@ def main(ag):
     &#34;&#34;&#34;
     Just calls everything else
     &#34;&#34;&#34;
-    print(listmd(Path.cwd()))
     initializeSite(ag)
+    create_index(Path.cwd())
+    svars = state_vars()
+    compilemd(Path.cwd(), svars)
     if ag.p == True:
         newPost()</code></pre>
 </details>

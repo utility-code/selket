@@ -13,9 +13,9 @@ list_to_init = [
     "assets",
     "assets/js",
     "assets/css",
+    "assets/img",
     "_posts",
     "_compiled",
-    ".nojekyll",
 ]
 
 
@@ -32,8 +32,7 @@ def joinAndMake(p1, p2):
 
 def createConfig(ag, fp):
     """
-    Create the config file, json object. Pretty formatted because why not.
-    """
+    Create the config file, json object. Pretty formatted because why not."""
     d_config = {
         "name": ag.n,
         "math": True,
@@ -41,6 +40,10 @@ def createConfig(ag, fp):
         "author": "",
         "title": "",
         "description": "",
+        "fenced_code": True,
+        "sane_lists": True,
+        "wikilinks": True,
+        "codehilite": True,
     }
     cpath = Path.joinpath(fp, "config.json")
     if Path.is_file(cpath) == False:
@@ -59,6 +62,9 @@ def inits(ag, fpath, newfp):
                 joinAndMake(newfp, i)
 
             Path.touch(Path.joinpath(newfp, "index.md"))
+            Path.touch(Path.joinpath(newfp / "_layouts", "default.html"))
+            Path.touch(Path.joinpath(newfp / "_assets", "style.css"))
+            Path.touch(Path.joinpath(newfp, ".nojekyll"))
     print(f"Your site is at : {str(newfp)}")
 
 
@@ -107,7 +113,7 @@ def createPost(fpath, fname, ptags):
         print(f"Your post is at : ", fname.with_suffix(".md"))
         with open(fname.with_suffix(".md"), "w+") as f:
             f.write(
-                f"---\nlayout : default\ndate: {datetime.now().strftime('%Y-%m-%d')}\ntags: {formatTags(ptags)}\n---\n"
+                f"---\nlayout: default\ntitle: {fname.name}\ncategories: post\ndate: {datetime.now().strftime('%Y-%m-%d')}\ntags: {formatTags(ptags)}\n---\n"
             )
 
 
