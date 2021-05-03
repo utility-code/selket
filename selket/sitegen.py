@@ -4,7 +4,6 @@ from pathlib import Path
 from tqdm import tqdm
 import http.server
 import socketserver
-from datetime import datetime
 
 """
 This module takes care of Markdown -> HTML and generating the site
