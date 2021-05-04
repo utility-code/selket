@@ -4,6 +4,7 @@ from pathlib import Path
 from tqdm import tqdm
 import http.server
 import socketserver
+from datetime import datetime
 
 """
 This module takes care of Markdown -> HTML and generating the site
@@ -12,7 +13,7 @@ This module takes care of Markdown -> HTML and generating the site
 
 def serve():
     """
-    Local server creation on given port
+    Local server creation. Chooses a free port and creates
     """
     handler = http.server.SimpleHTTPRequestHandler
 
@@ -65,11 +66,23 @@ def returnIndex(statev):
     with open(statev["index_path"], "r") as f:
         all_files = json.load(f)
 
-    for i in list(reversed(sorted(all_files.keys()))):
-        temp = all_files[i]
-        strsend += f"""<li>
-        <a href = ./_compiled/{i.split('.')[0]+'.html'}>{temp[3]}</li>"""
+    sorted_dict = dict(reversed(sorted(all_files.items(), key=lambda item: item[1][4])))
 
+    for i in list(sorted_dict.keys()):
+        temp = all_files[i]
+        if len(temp[3]) > 1:
+            try:
+                date = datetime.fromisoformat(temp[4].strip()).strftime(
+                    statev["date_format"]
+                )
+            except ValueError:
+                date = ""
+            str_rec = statev["index_format"]
+            str_rec = str_rec.replace("date", date)
+            str_rec = str_rec.replace("summary", temp[5])
+            str_rec = str_rec.replace("title", temp[3])
+            str_rec = str_rec.replace("link", f"./_compiled/{i.split('.')[0]}.html")
+            strsend += str_rec
     return strsend + "\n<ul>\n"
 
 
@@ -105,7 +118,7 @@ def markToHTML(fpath, statev):
         with open(Path.joinpath(Path.cwd() / "_layouts/", layout), "r") as f2:
             f2 = f2.read()
             meta_lis = []
-            for metas in ["layout", "categories", "tags", "title", "date"]:
+            for metas in ["layout", "categories", "tags", "title", "date", "summary"]:
                 try:
                     if metas == "tags":
                         meta_lis.append(md.Meta[metas][0].split(" "))
@@ -118,12 +131,15 @@ def markToHTML(fpath, statev):
 
 
 def mdtoIndex(fpath):
+    """
+    Separate function to create an index. Just goes through files to create the index
+    """
     with open(fpath, "r") as f:
         f = f.read()
         md = markdown.Markdown(extensions=["meta"])
         md.convert(f)
         meta_lis = []
-        for metas in ["layout", "categories", "tags", "title"]:
+        for metas in ["layout", "categories", "tags", "title", "date", "summary"]:
             try:
                 if metas == "tags":
                     meta_lis.append(md.Meta[metas][0].split(" "))
@@ -135,7 +151,11 @@ def mdtoIndex(fpath):
 
 
 def create_index(fpath):
+    """
+    Creates the indexed.json file using the Meta information provided
+    """
     mdLi = [x for x in Path.glob(fpath, "*/*.md")]
+    mdLi = [x for x in mdLi if "README" not in str(x)]
     indexed = {}
     for fil in tqdm(mdLi, total=len(mdLi)):
         mfile = mdtoIndex(fil)
@@ -153,6 +173,8 @@ def compilemd(fpath, statev):
     """
     # root directory
     mdLi = [x for x in Path.glob(fpath, "*.md")]
+    mdLi = [x for x in mdLi if "README" not in str(x)]
+
     for fil in mdLi:
         nm = fil.name
         with open(Path.joinpath(Path.cwd(), nm).with_suffix(".html"), "w+") as f:

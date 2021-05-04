@@ -7,8 +7,8 @@ arg = ap.ArgumentParser()
 arg.add_argument(
     "-n", help="site name", required=True, type=str, default="myamazingsite"
 )
-arg.add_argument("-s", help="serve site", required=False, type=bool, default=False)
-arg.add_argument("-p", help="new post", required=False, type=bool, default=False)
+arg.add_argument("-s", help="serve site", required=False, action="store_true")
+arg.add_argument("-p", help="new post", required=False, action="store_true")
 arg.add_argument(
     "-f",
     help="BE CAREFUL : delete everything and create fresh paths",
@@ -18,6 +18,7 @@ arg.add_argument(
 )
 
 ag = arg.parse_args()
+print(ag)
 
 if ag.s == False:
     executor.main(ag)

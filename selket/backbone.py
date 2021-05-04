@@ -44,6 +44,8 @@ def createConfig(ag, fp):
         "sane_lists": True,
         "wikilinks": True,
         "codehilite": True,
+        "date_format": "%Y %B",
+        "index_format": '<li><a href = "{link}">{title}: {date}</a><br>{summary}</li>',
     }
     cpath = Path.joinpath(fp, "config.json")
     if Path.is_file(cpath) == False:
@@ -65,6 +67,7 @@ def inits(ag, fpath, newfp):
             Path.touch(Path.joinpath(newfp / "_layouts", "default.html"))
             Path.touch(Path.joinpath(newfp / "_assets", "style.css"))
             Path.touch(Path.joinpath(newfp, ".nojekyll"))
+            Path.touch(Path.joinpath(newfp, "CNAME"))
     print(f"Your site is at : {str(newfp)}")
 
 
@@ -102,7 +105,7 @@ def formatTags(ptags):
     return ",".join(t)
 
 
-def createPost(fpath, fname, ptags):
+def createPost(fpath, fname, ptags, summary):
     """
     Adds default tags and creates
     """
@@ -113,7 +116,7 @@ def createPost(fpath, fname, ptags):
         print(f"Your post is at : ", fname.with_suffix(".md"))
         with open(fname.with_suffix(".md"), "w+") as f:
             f.write(
-                f"---\nlayout: default\ntitle: {fname.name}\ncategories: post\ndate: {datetime.now().strftime('%Y-%m-%d')}\ntags: {formatTags(ptags)}\n---\n[title]\n\n"
+                f"---\nlayout: default\ntitle: {fname.name}\ncategories: post\ndate: {datetime.now().strftime('%Y-%m-%d')}\ntags: {formatTags(ptags)}\nsummary: {summary}\n---\n[title]\n\n"
             )
 
 
@@ -125,4 +128,5 @@ def newPost():
     fpath = Path.joinpath(Path.cwd(), "_posts")
     pname = input("Post name : ")
     ptags = input("Comma separated tags : ")
-    createPost(fpath, pname, ptags)
+    summary = input("One line description : ")
+    createPost(fpath, pname, ptags, summary)

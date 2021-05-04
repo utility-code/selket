@@ -72,6 +72,8 @@ def createConfig(ag, fp):
         &#34;sane_lists&#34;: True,
         &#34;wikilinks&#34;: True,
         &#34;codehilite&#34;: True,
+        &#34;date_format&#34;: &#34;%Y %B&#34;,
+        &#34;index_format&#34;: &#39;&lt;li&gt;&lt;a href = &#34;{link}&#34;&gt;{title}: {date}&lt;/a&gt;&lt;br&gt;{summary}&lt;/li&gt;&#39;,
     }
     cpath = Path.joinpath(fp, &#34;config.json&#34;)
     if Path.is_file(cpath) == False:
@@ -93,6 +95,7 @@ def inits(ag, fpath, newfp):
             Path.touch(Path.joinpath(newfp / &#34;_layouts&#34;, &#34;default.html&#34;))
             Path.touch(Path.joinpath(newfp / &#34;_assets&#34;, &#34;style.css&#34;))
             Path.touch(Path.joinpath(newfp, &#34;.nojekyll&#34;))
+            Path.touch(Path.joinpath(newfp, &#34;CNAME&#34;))
     print(f&#34;Your site is at : {str(newfp)}&#34;)
 
 
@@ -130,7 +133,7 @@ def formatTags(ptags):
     return &#34;,&#34;.join(t)
 
 
-def createPost(fpath, fname, ptags):
+def createPost(fpath, fname, ptags, summary):
     &#34;&#34;&#34;
     Adds default tags and creates
     &#34;&#34;&#34;
@@ -141,7 +144,7 @@ def createPost(fpath, fname, ptags):
         print(f&#34;Your post is at : &#34;, fname.with_suffix(&#34;.md&#34;))
         with open(fname.with_suffix(&#34;.md&#34;), &#34;w+&#34;) as f:
             f.write(
-                f&#34;---\nlayout: default\ntitle: {fname.name}\ncategories: post\ndate: {datetime.now().strftime(&#39;%Y-%m-%d&#39;)}\ntags: {formatTags(ptags)}\n---\n[title]\n\n&#34;
+                f&#34;---\nlayout: default\ntitle: {fname.name}\ncategories: post\ndate: {datetime.now().strftime(&#39;%Y-%m-%d&#39;)}\ntags: {formatTags(ptags)}\nsummary: {summary}\n---\n[title]\n\n&#34;
             )
 
 
@@ -153,7 +156,8 @@ def newPost():
     fpath = Path.joinpath(Path.cwd(), &#34;_posts&#34;)
     pname = input(&#34;Post name : &#34;)
     ptags = input(&#34;Comma separated tags : &#34;)
-    createPost(fpath, pname, ptags)</code></pre>
+    summary = input(&#34;One line description : &#34;)
+    createPost(fpath, pname, ptags, summary)</code></pre>
 </details>
 </section>
 <section>
@@ -186,6 +190,8 @@ def newPost():
         &#34;sane_lists&#34;: True,
         &#34;wikilinks&#34;: True,
         &#34;codehilite&#34;: True,
+        &#34;date_format&#34;: &#34;%Y %B&#34;,
+        &#34;index_format&#34;: &#39;&lt;li&gt;&lt;a href = &#34;{link}&#34;&gt;{title}: {date}&lt;/a&gt;&lt;br&gt;{summary}&lt;/li&gt;&#39;,
     }
     cpath = Path.joinpath(fp, &#34;config.json&#34;)
     if Path.is_file(cpath) == False:
@@ -194,7 +200,7 @@ def newPost():
 </details>
 </dd>
 <dt id="selket.backbone.createPost"><code class="name flex">
-<span>def <span class="ident">createPost</span></span>(<span>fpath, fname, ptags)</span>
+<span>def <span class="ident">createPost</span></span>(<span>fpath, fname, ptags, summary)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Adds default tags and creates</p></div>
@@ -202,7 +208,7 @@ def newPost():
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def createPost(fpath, fname, ptags):
+<pre><code class="python">def createPost(fpath, fname, ptags, summary):
     &#34;&#34;&#34;
     Adds default tags and creates
     &#34;&#34;&#34;
@@ -213,7 +219,7 @@ def newPost():
         print(f&#34;Your post is at : &#34;, fname.with_suffix(&#34;.md&#34;))
         with open(fname.with_suffix(&#34;.md&#34;), &#34;w+&#34;) as f:
             f.write(
-                f&#34;---\nlayout: default\ntitle: {fname.name}\ncategories: post\ndate: {datetime.now().strftime(&#39;%Y-%m-%d&#39;)}\ntags: {formatTags(ptags)}\n---\n[title]\n\n&#34;
+                f&#34;---\nlayout: default\ntitle: {fname.name}\ncategories: post\ndate: {datetime.now().strftime(&#39;%Y-%m-%d&#39;)}\ntags: {formatTags(ptags)}\nsummary: {summary}\n---\n[title]\n\n&#34;
             )</code></pre>
 </details>
 </dd>
@@ -285,6 +291,7 @@ Also option to delete and recreate everything from scratch (debug lol)</p></div>
             Path.touch(Path.joinpath(newfp / &#34;_layouts&#34;, &#34;default.html&#34;))
             Path.touch(Path.joinpath(newfp / &#34;_assets&#34;, &#34;style.css&#34;))
             Path.touch(Path.joinpath(newfp, &#34;.nojekyll&#34;))
+            Path.touch(Path.joinpath(newfp, &#34;CNAME&#34;))
     print(f&#34;Your site is at : {str(newfp)}&#34;)</code></pre>
 </details>
 </dd>
@@ -326,7 +333,8 @@ Calls create function</p></div>
     fpath = Path.joinpath(Path.cwd(), &#34;_posts&#34;)
     pname = input(&#34;Post name : &#34;)
     ptags = input(&#34;Comma separated tags : &#34;)
-    createPost(fpath, pname, ptags)</code></pre>
+    summary = input(&#34;One line description : &#34;)
+    createPost(fpath, pname, ptags, summary)</code></pre>
 </details>
 </dd>
 <dt id="selket.backbone.postName"><code class="name flex">

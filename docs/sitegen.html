@@ -32,6 +32,7 @@ from pathlib import Path
 from tqdm import tqdm
 import http.server
 import socketserver
+from datetime import datetime
 
 &#34;&#34;&#34;
 This module takes care of Markdown -&gt; HTML and generating the site
@@ -40,7 +41,7 @@ This module takes care of Markdown -&gt; HTML and generating the site
 
 def serve():
     &#34;&#34;&#34;
-    Local server creation on given port
+    Local server creation. Chooses a free port and creates
     &#34;&#34;&#34;
     handler = http.server.SimpleHTTPRequestHandler
 
@@ -93,11 +94,23 @@ def returnIndex(statev):
     with open(statev[&#34;index_path&#34;], &#34;r&#34;) as f:
         all_files = json.load(f)
 
-    for i in list(reversed(sorted(all_files.keys()))):
-        temp = all_files[i]
-        strsend += f&#34;&#34;&#34;&lt;li&gt;
-        &lt;a href = ./_compiled/{i.split(&#39;.&#39;)[0]+&#39;.html&#39;}&gt;{temp[3]}&lt;/li&gt;&#34;&#34;&#34;
+    sorted_dict = dict(reversed(sorted(all_files.items(), key=lambda item: item[1][4])))
 
+    for i in list(sorted_dict.keys()):
+        temp = all_files[i]
+        if len(temp[3]) &gt; 1:
+            try:
+                date = datetime.fromisoformat(temp[4].strip()).strftime(
+                    statev[&#34;date_format&#34;]
+                )
+            except ValueError:
+                date = &#34;&#34;
+            str_rec = statev[&#34;index_format&#34;]
+            str_rec = str_rec.replace(&#34;date&#34;, date)
+            str_rec = str_rec.replace(&#34;summary&#34;, temp[5])
+            str_rec = str_rec.replace(&#34;title&#34;, temp[3])
+            str_rec = str_rec.replace(&#34;link&#34;, f&#34;./_compiled/{i.split(&#39;.&#39;)[0]}.html&#34;)
+            strsend += str_rec
     return strsend + &#34;\n&lt;ul&gt;\n&#34;
 
 
@@ -133,7 +146,7 @@ def markToHTML(fpath, statev):
         with open(Path.joinpath(Path.cwd() / &#34;_layouts/&#34;, layout), &#34;r&#34;) as f2:
             f2 = f2.read()
             meta_lis = []
-            for metas in [&#34;layout&#34;, &#34;categories&#34;, &#34;tags&#34;, &#34;title&#34;, &#34;date&#34;]:
+            for metas in [&#34;layout&#34;, &#34;categories&#34;, &#34;tags&#34;, &#34;title&#34;, &#34;date&#34;, &#34;summary&#34;]:
                 try:
                     if metas == &#34;tags&#34;:
                         meta_lis.append(md.Meta[metas][0].split(&#34; &#34;))
@@ -146,12 +159,15 @@ def markToHTML(fpath, statev):
 
 
 def mdtoIndex(fpath):
+    &#34;&#34;&#34;
+    Separate function to create an index. Just goes through files to create the index
+    &#34;&#34;&#34;
     with open(fpath, &#34;r&#34;) as f:
         f = f.read()
         md = markdown.Markdown(extensions=[&#34;meta&#34;])
         md.convert(f)
         meta_lis = []
-        for metas in [&#34;layout&#34;, &#34;categories&#34;, &#34;tags&#34;, &#34;title&#34;]:
+        for metas in [&#34;layout&#34;, &#34;categories&#34;, &#34;tags&#34;, &#34;title&#34;, &#34;date&#34;, &#34;summary&#34;]:
             try:
                 if metas == &#34;tags&#34;:
                     meta_lis.append(md.Meta[metas][0].split(&#34; &#34;))
@@ -163,7 +179,11 @@ def mdtoIndex(fpath):
 
 
 def create_index(fpath):
+    &#34;&#34;&#34;
+    Creates the indexed.json file using the Meta information provided
+    &#34;&#34;&#34;
     mdLi = [x for x in Path.glob(fpath, &#34;*/*.md&#34;)]
+    mdLi = [x for x in mdLi if &#34;README&#34; not in str(x)]
     indexed = {}
     for fil in tqdm(mdLi, total=len(mdLi)):
         mfile = mdtoIndex(fil)
@@ -181,6 +201,8 @@ def compilemd(fpath, statev):
     &#34;&#34;&#34;
     # root directory
     mdLi = [x for x in Path.glob(fpath, &#34;*.md&#34;)]
+    mdLi = [x for x in mdLi if &#34;README&#34; not in str(x)]
+
     for fil in mdLi:
         nm = fil.name
         with open(Path.joinpath(Path.cwd(), nm).with_suffix(&#34;.html&#34;), &#34;w+&#34;) as f:
@@ -221,6 +243,8 @@ Also indexes the files for access to information</p></div>
     &#34;&#34;&#34;
     # root directory
     mdLi = [x for x in Path.glob(fpath, &#34;*.md&#34;)]
+    mdLi = [x for x in mdLi if &#34;README&#34; not in str(x)]
+
     for fil in mdLi:
         nm = fil.name
         with open(Path.joinpath(Path.cwd(), nm).with_suffix(&#34;.html&#34;), &#34;w+&#34;) as f:
@@ -263,13 +287,17 @@ Also indexes the files for access to information</p></div>
 <span>def <span class="ident">create_index</span></span>(<span>fpath)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Creates the indexed.json file using the Meta information provided</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def create_index(fpath):
+    &#34;&#34;&#34;
+    Creates the indexed.json file using the Meta information provided
+    &#34;&#34;&#34;
     mdLi = [x for x in Path.glob(fpath, &#34;*/*.md&#34;)]
+    mdLi = [x for x in mdLi if &#34;README&#34; not in str(x)]
     indexed = {}
     for fil in tqdm(mdLi, total=len(mdLi)):
         mfile = mdtoIndex(fil)
@@ -305,7 +333,7 @@ Also indexes the files for access to information</p></div>
         with open(Path.joinpath(Path.cwd() / &#34;_layouts/&#34;, layout), &#34;r&#34;) as f2:
             f2 = f2.read()
             meta_lis = []
-            for metas in [&#34;layout&#34;, &#34;categories&#34;, &#34;tags&#34;, &#34;title&#34;, &#34;date&#34;]:
+            for metas in [&#34;layout&#34;, &#34;categories&#34;, &#34;tags&#34;, &#34;title&#34;, &#34;date&#34;, &#34;summary&#34;]:
                 try:
                     if metas == &#34;tags&#34;:
                         meta_lis.append(md.Meta[metas][0].split(&#34; &#34;))
@@ -321,18 +349,21 @@ Also indexes the files for access to information</p></div>
 <span>def <span class="ident">mdtoIndex</span></span>(<span>fpath)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Separate function to create an index. Just goes through files to create the index</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def mdtoIndex(fpath):
+    &#34;&#34;&#34;
+    Separate function to create an index. Just goes through files to create the index
+    &#34;&#34;&#34;
     with open(fpath, &#34;r&#34;) as f:
         f = f.read()
         md = markdown.Markdown(extensions=[&#34;meta&#34;])
         md.convert(f)
         meta_lis = []
-        for metas in [&#34;layout&#34;, &#34;categories&#34;, &#34;tags&#34;, &#34;title&#34;]:
+        for metas in [&#34;layout&#34;, &#34;categories&#34;, &#34;tags&#34;, &#34;title&#34;, &#34;date&#34;, &#34;summary&#34;]:
             try:
                 if metas == &#34;tags&#34;:
                     meta_lis.append(md.Meta[metas][0].split(&#34; &#34;))
@@ -385,11 +416,23 @@ Also indexes the files for access to information</p></div>
     with open(statev[&#34;index_path&#34;], &#34;r&#34;) as f:
         all_files = json.load(f)
 
-    for i in list(reversed(sorted(all_files.keys()))):
-        temp = all_files[i]
-        strsend += f&#34;&#34;&#34;&lt;li&gt;
-        &lt;a href = ./_compiled/{i.split(&#39;.&#39;)[0]+&#39;.html&#39;}&gt;{temp[3]}&lt;/li&gt;&#34;&#34;&#34;
+    sorted_dict = dict(reversed(sorted(all_files.items(), key=lambda item: item[1][4])))
 
+    for i in list(sorted_dict.keys()):
+        temp = all_files[i]
+        if len(temp[3]) &gt; 1:
+            try:
+                date = datetime.fromisoformat(temp[4].strip()).strftime(
+                    statev[&#34;date_format&#34;]
+                )
+            except ValueError:
+                date = &#34;&#34;
+            str_rec = statev[&#34;index_format&#34;]
+            str_rec = str_rec.replace(&#34;date&#34;, date)
+            str_rec = str_rec.replace(&#34;summary&#34;, temp[5])
+            str_rec = str_rec.replace(&#34;title&#34;, temp[3])
+            str_rec = str_rec.replace(&#34;link&#34;, f&#34;./_compiled/{i.split(&#39;.&#39;)[0]}.html&#34;)
+            strsend += str_rec
     return strsend + &#34;\n&lt;ul&gt;\n&#34;</code></pre>
 </details>
 </dd>
@@ -397,14 +440,14 @@ Also indexes the files for access to information</p></div>
 <span>def <span class="ident">serve</span></span>(<span>)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Local server creation on given port</p></div>
+<div class="desc"><p>Local server creation. Chooses a free port and creates</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def serve():
     &#34;&#34;&#34;
-    Local server creation on given port
+    Local server creation. Chooses a free port and creates
     &#34;&#34;&#34;
     handler = http.server.SimpleHTTPRequestHandler
 

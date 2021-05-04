@@ -1,12 +1,10 @@
 ## To Do
-- customizable index
+
 - Easier post creation syntax
-- Search
 - RSS feed
-- Fix some of the long name articles not showing up
-- Convert my site to use this
 - Convert to python package
 - Write a blog on the making of this and usage
+- documentation
 
 ## Done
 
@@ -23,4 +21,7 @@
 - read config
 - replace liquid syntax here
 - index creation
-
+- customizable index
+- Fix some of the long name articles not showing up
+- Convert my site to use this
+- Search
