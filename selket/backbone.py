@@ -45,6 +45,7 @@ def createConfig(ag, fp):
         "wikilinks": True,
         "codehilite": True,
         "date_format": "%Y %B",
+        "index2": None,
         "index_format": '<li><a href = "{link}">{title}: {date}</a><br>{summary}</li>',
     }
     cpath = Path.joinpath(fp, "config.json")
@@ -116,7 +117,7 @@ def createPost(fpath, fname, ptags, summary):
         print(f"Your post is at : ", fname.with_suffix(".md"))
         with open(fname.with_suffix(".md"), "w+") as f:
             f.write(
-                f"---\nlayout: default\ntitle: {fname.name}\ncategories: post\ndate: {datetime.now().strftime('%Y-%m-%d')}\ntags: {formatTags(ptags)}\nsummary: {summary}\n---\n[title]\n\n"
+                f"---\nlayout: post\ntitle: {fname.name}\ncategories: post\ndate: {datetime.now().strftime('%Y-%m-%d')}\ntags: {formatTags(ptags)}\nsummary: {summary}\n---\n[title]\n\n"
             )
 
 

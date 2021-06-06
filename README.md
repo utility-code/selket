@@ -8,6 +8,7 @@
 
 ## Features
 - Write in markdown
+- Two separate sites from same index of files
 - Single config file
 - Auto Table of contents, math parsing, fenced code, wikilinks, easier lists etc directly from markdown
 - Minimal and very small build

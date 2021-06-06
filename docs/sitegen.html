@@ -91,12 +91,17 @@ def returnIndex(statev):
     Creates an index
     &#34;&#34;&#34;
     strsend = &#34;&lt;ul&gt;\n&#34;
+    try:
+        check_name = statev[&#34;index2&#34;]
+    except:
+        check_name = &#34;&#34;
     with open(statev[&#34;index_path&#34;], &#34;r&#34;) as f:
         all_files = json.load(f)
 
     sorted_dict = dict(reversed(sorted(all_files.items(), key=lambda item: item[1][4])))
 
     for i in list(sorted_dict.keys()):
+        flag = 0
         temp = all_files[i]
         if len(temp[3]) &gt; 1:
             try:
@@ -108,12 +113,93 @@ def returnIndex(statev):
             str_rec = statev[&#34;index_format&#34;]
             str_rec = str_rec.replace(&#34;date&#34;, date)
             str_rec = str_rec.replace(&#34;summary&#34;, temp[5])
-            str_rec = str_rec.replace(&#34;title&#34;, temp[3])
+            chk = str_rec.replace(&#34;title&#34;, temp[3])
+            if len(check_name) &gt; 0 and check_name in chk:
+                flag = 1
+                str_rec = &#34;&#34;
+            str_rec = chk
             str_rec = str_rec.replace(&#34;link&#34;, f&#34;./_compiled/{i.split(&#39;.&#39;)[0]}.html&#34;)
-            strsend += str_rec
+            if flag != 1:
+                strsend += str_rec
     return strsend + &#34;\n&lt;ul&gt;\n&#34;
 
 
+def returnSecondIndex(statev):
+    &#34;&#34;&#34;
+    Creates an index for the second site
+    &#34;&#34;&#34;
+    strsend = &#34;&lt;ul&gt;\n&#34;
+    try:
+        check_name = statev[&#34;index2&#34;]
+    except:
+        check_name = &#34;&#34;
+    with open(statev[&#34;index_path&#34;], &#34;r&#34;) as f:
+        all_files = json.load(f)
+
+    sorted_dict = dict(reversed(sorted(all_files.items(), key=lambda item: item[1][4])))
+
+    for i in list(sorted_dict.keys()):
+        flag = 0
+        temp = all_files[i]
+        if len(temp[3]) &gt; 1:
+            try:
+                date = datetime.fromisoformat(temp[4].strip()).strftime(
+                    statev[&#34;date_format&#34;]
+                )
+            except ValueError:
+                date = &#34;&#34;
+            str_rec = statev[&#34;index_format&#34;]
+            str_rec = str_rec.replace(&#34;date&#34;, date)
+            str_rec = str_rec.replace(&#34;summary&#34;, temp[5])
+            chk = str_rec.replace(&#34;title&#34;, temp[3])
+            if len(check_name) &gt; 0 and check_name not in chk:
+                flag = 1
+                str_rec = &#34;&#34;
+            str_rec = chk
+            str_rec = str_rec.replace(&#34;;&#34;, &#34;&#34;)
+            str_rec = str_rec.replace(check_name, &#34;&#34;)
+
+            str_rec = str_rec.replace(&#34;link&#34;, f&#34;./_compiled/{i.split(&#39;.&#39;)[0]}.html&#34;)
+            if flag != 1:
+                strsend += str_rec
+    return strsend + &#34;\n&lt;ul&gt;\n&#34;
+
+
+#  def returnSecondIndex(statev):
+#      &#34;&#34;&#34;
+#      Creates an index
+#      &#34;&#34;&#34;
+#      strsend = &#34;&lt;ul&gt;\n&#34;
+#      with open(statev[&#34;index_path&#34;], &#34;r&#34;) as f:
+#          all_files = json.load(f)
+#
+#      check_name = statev[&#34;index2&#34;]
+#
+#      sorted_dict = dict(reversed(sorted(all_files.items(), key=lambda item: item[1][4])))
+#
+#      for i in list(sorted_dict.keys()):
+#          temp = all_files[i]
+#          if len(temp[3]) &gt; 1:
+#              try:
+#                  date = datetime.fromisoformat(temp[4].strip()).strftime(
+#                      statev[&#34;date_format&#34;]
+#                  )
+#              except ValueError:
+#                  date = &#34;&#34;
+#              str_rec = statev[&#34;index_format&#34;]
+#              str_rec = str_rec.replace(&#34;date&#34;, date)
+#              str_rec = str_rec.replace(&#34;summary&#34;, temp[5])
+#
+#              temp_check = str_rec.replace(&#34;title&#34;, temp[3])
+#              temp_check = temp_check.replace(&#34;;&#34;,&#34;&#34;)
+#              temp_check = temp_check.replace(check_name,&#34;&#34;)
+#              if check_name in temp_check:
+#                  str_rec = temp_check
+#                  str_rec = str_rec.replace(&#34;link&#34;, f&#34;./_compiled/{i.split(&#39;.&#39;)[0]}.html&#34;)
+#                  strsend += str_rec
+#      return strsend + &#34;\n&lt;ul&gt;\n&#34;
+#
+#
 def replacerHTML(fil, statev, conv, meta_lis):
     &#34;&#34;&#34;
     Takes the file, replaces whatever is needed to compile in the html
@@ -121,6 +207,7 @@ def replacerHTML(fil, statev, conv, meta_lis):
     dict_replacer = {
         &#34;[content]&#34;: conv,
         &#34;[index]&#34;: returnIndex(statev),
+        &#34;[index2]&#34;: returnSecondIndex(statev),
         &#34;[total_posts]&#34;: str(statev[&#34;total_posts&#34;]),
         &#34;[title]&#34;: f&#34;&lt;h1&gt;{str(meta_lis[3])}&lt;/h1&gt;\n\n&#34;,
     }
@@ -390,6 +477,7 @@ Also indexes the files for access to information</p></div>
     dict_replacer = {
         &#34;[content]&#34;: conv,
         &#34;[index]&#34;: returnIndex(statev),
+        &#34;[index2]&#34;: returnSecondIndex(statev),
         &#34;[total_posts]&#34;: str(statev[&#34;total_posts&#34;]),
         &#34;[title]&#34;: f&#34;&lt;h1&gt;{str(meta_lis[3])}&lt;/h1&gt;\n\n&#34;,
     }
@@ -413,12 +501,17 @@ Also indexes the files for access to information</p></div>
     Creates an index
     &#34;&#34;&#34;
     strsend = &#34;&lt;ul&gt;\n&#34;
+    try:
+        check_name = statev[&#34;index2&#34;]
+    except:
+        check_name = &#34;&#34;
     with open(statev[&#34;index_path&#34;], &#34;r&#34;) as f:
         all_files = json.load(f)
 
     sorted_dict = dict(reversed(sorted(all_files.items(), key=lambda item: item[1][4])))
 
     for i in list(sorted_dict.keys()):
+        flag = 0
         temp = all_files[i]
         if len(temp[3]) &gt; 1:
             try:
@@ -430,9 +523,64 @@ Also indexes the files for access to information</p></div>
             str_rec = statev[&#34;index_format&#34;]
             str_rec = str_rec.replace(&#34;date&#34;, date)
             str_rec = str_rec.replace(&#34;summary&#34;, temp[5])
-            str_rec = str_rec.replace(&#34;title&#34;, temp[3])
+            chk = str_rec.replace(&#34;title&#34;, temp[3])
+            if len(check_name) &gt; 0 and check_name in chk:
+                flag = 1
+                str_rec = &#34;&#34;
+            str_rec = chk
             str_rec = str_rec.replace(&#34;link&#34;, f&#34;./_compiled/{i.split(&#39;.&#39;)[0]}.html&#34;)
-            strsend += str_rec
+            if flag != 1:
+                strsend += str_rec
+    return strsend + &#34;\n&lt;ul&gt;\n&#34;</code></pre>
+</details>
+</dd>
+<dt id="selket.sitegen.returnSecondIndex"><code class="name flex">
+<span>def <span class="ident">returnSecondIndex</span></span>(<span>statev)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Creates an index for the second site</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def returnSecondIndex(statev):
+    &#34;&#34;&#34;
+    Creates an index for the second site
+    &#34;&#34;&#34;
+    strsend = &#34;&lt;ul&gt;\n&#34;
+    try:
+        check_name = statev[&#34;index2&#34;]
+    except:
+        check_name = &#34;&#34;
+    with open(statev[&#34;index_path&#34;], &#34;r&#34;) as f:
+        all_files = json.load(f)
+
+    sorted_dict = dict(reversed(sorted(all_files.items(), key=lambda item: item[1][4])))
+
+    for i in list(sorted_dict.keys()):
+        flag = 0
+        temp = all_files[i]
+        if len(temp[3]) &gt; 1:
+            try:
+                date = datetime.fromisoformat(temp[4].strip()).strftime(
+                    statev[&#34;date_format&#34;]
+                )
+            except ValueError:
+                date = &#34;&#34;
+            str_rec = statev[&#34;index_format&#34;]
+            str_rec = str_rec.replace(&#34;date&#34;, date)
+            str_rec = str_rec.replace(&#34;summary&#34;, temp[5])
+            chk = str_rec.replace(&#34;title&#34;, temp[3])
+            if len(check_name) &gt; 0 and check_name not in chk:
+                flag = 1
+                str_rec = &#34;&#34;
+            str_rec = chk
+            str_rec = str_rec.replace(&#34;;&#34;, &#34;&#34;)
+            str_rec = str_rec.replace(check_name, &#34;&#34;)
+
+            str_rec = str_rec.replace(&#34;link&#34;, f&#34;./_compiled/{i.split(&#39;.&#39;)[0]}.html&#34;)
+            if flag != 1:
+                strsend += str_rec
     return strsend + &#34;\n&lt;ul&gt;\n&#34;</code></pre>
 </details>
 </dd>
@@ -513,6 +661,7 @@ Also indexes the files for access to information</p></div>
 <li><code><a title="selket.sitegen.mdtoIndex" href="#selket.sitegen.mdtoIndex">mdtoIndex</a></code></li>
 <li><code><a title="selket.sitegen.replacerHTML" href="#selket.sitegen.replacerHTML">replacerHTML</a></code></li>
 <li><code><a title="selket.sitegen.returnIndex" href="#selket.sitegen.returnIndex">returnIndex</a></code></li>
+<li><code><a title="selket.sitegen.returnSecondIndex" href="#selket.sitegen.returnSecondIndex">returnSecondIndex</a></code></li>
 <li><code><a title="selket.sitegen.serve" href="#selket.sitegen.serve">serve</a></code></li>
 <li><code><a title="selket.sitegen.state_vars" href="#selket.sitegen.state_vars">state_vars</a></code></li>
 </ul>

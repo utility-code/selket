@@ -1,10 +1,8 @@
 ## To Do
 
-- Easier post creation syntax
 - RSS feed
 - Convert to python package
 - Write a blog on the making of this and usage
-- documentation
 
 ## Done
 
@@ -25,3 +23,5 @@
 - Fix some of the long name articles not showing up
 - Convert my site to use this
 - Search
+- Easier post creation syntax
+- documentation
