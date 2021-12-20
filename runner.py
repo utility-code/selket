@@ -23,4 +23,5 @@ print(ag)
 if ag.s == False:
     executor.main(ag)
 else:
+    executor.main(ag)
     serve()

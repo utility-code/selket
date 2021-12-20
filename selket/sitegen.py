@@ -137,41 +137,6 @@ def returnSecondIndex(statev):
     return strsend + "\n<ul>\n"
 
 
-#  def returnSecondIndex(statev):
-#      """
-#      Creates an index
-#      """
-#      strsend = "<ul>\n"
-#      with open(statev["index_path"], "r") as f:
-#          all_files = json.load(f)
-#
-#      check_name = statev["index2"]
-#
-#      sorted_dict = dict(reversed(sorted(all_files.items(), key=lambda item: item[1][4])))
-#
-#      for i in list(sorted_dict.keys()):
-#          temp = all_files[i]
-#          if len(temp[3]) > 1:
-#              try:
-#                  date = datetime.fromisoformat(temp[4].strip()).strftime(
-#                      statev["date_format"]
-#                  )
-#              except ValueError:
-#                  date = ""
-#              str_rec = statev["index_format"]
-#              str_rec = str_rec.replace("date", date)
-#              str_rec = str_rec.replace("summary", temp[5])
-#
-#              temp_check = str_rec.replace("title", temp[3])
-#              temp_check = temp_check.replace(";","")
-#              temp_check = temp_check.replace(check_name,"")
-#              if check_name in temp_check:
-#                  str_rec = temp_check
-#                  str_rec = str_rec.replace("link", f"./_compiled/{i.split('.')[0]}.html")
-#                  strsend += str_rec
-#      return strsend + "\n<ul>\n"
-#
-#
 def replacerHTML(fil, statev, conv, meta_lis):
     """
     Takes the file, replaces whatever is needed to compile in the html

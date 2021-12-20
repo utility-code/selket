@@ -16,6 +16,7 @@ list_to_init = [
     "assets/img",
     "_posts",
     "_compiled",
+    "_drafts",
 ]
 
 

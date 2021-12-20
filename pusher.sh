@@ -1,3 +1,4 @@
+#!/bin/bash
 black "."
 pdoc --force --html -o docs selket
 python ../pyGroff/runner.py -f "syntax.txt" -o "syntax.pdf" -c -n "Subhaditya Mukherjee" -t "Selket documentation" -e "False"
